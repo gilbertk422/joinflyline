@@ -1,0 +1,89 @@
+.result__container {
+  position: relative;
+  margin-top: 26px;
+  width: 73%;
+  margin-left: calc(14% - 70px);
+  &::before {
+    position: absolute;
+    top: -2.3875rem;
+    content: "";
+    width: calc(100% + 2rem);
+    left: -2rem;
+    background-position: bottom;
+    height: calc(100% + 2.3875rem);
+  }
+  & > span {
+    font-size: 0.8rem;
+  }
+  .result__container-wrapper {
+    margin-top: 10px;
+  }
+  .result__filters-aside {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .result__filters-form {
+    position: sticky;
+    top: 0;
+    display: table;
+  }
+  .result__filters-count {
+    font-family: dona-bold;
+    font-size: .95rem;
+  }
+  .result__filters-info-link {
+    font-size: 14px;
+    color: #000000;
+  }
+  .result__filters {
+    .tile__body {
+      .airline-f-dropdown {
+        left: 0;
+        width: 100%;
+        right: auto;
+      }
+      .search-f-dropdown {
+        width: 100%;
+        &.price-dropdown {
+          margin: 0.75rem 0;
+        }
+      }
+      .input-group-text {
+        border: none;
+        padding: 0;
+      }
+      .bg-white-close-holes {
+        width: 100%;
+      }
+      input {
+        border: 2px solid #ececec;
+        padding-left: 1rem;
+        &::placeholder,
+        &.form-control::placeholder {
+          font-family: $dona-regular;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  .search-filter__bottom_text {
+    margin: 0;
+    background: #F7F9FC;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 0.8rem;
+  }
+}
+
+.result__filters-info {
+  background: #ffffff;
+  padding: 1.2rem 0.8rem;
+  margin-bottom: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

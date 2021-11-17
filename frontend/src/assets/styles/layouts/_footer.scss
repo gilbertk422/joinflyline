@@ -1,0 +1,38 @@
+.main-footer {
+  border-top: solid;
+  border-width: .5px;
+  border-color: #d8d8d8;
+  background-color: #fff;
+  padding: 5rem 0 2rem 0;
+  &__title {
+    font-family: $dona-black;
+    font-size: 1.25rem;
+    color: #000;
+    margin-bottom: 1.2rem;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    margin-bottom: 0.5rem;
+  }
+  &__link {
+    font-family: $dona-bold;
+    color: #919191;
+    font-size: 0.75rem;
+    transition: color .2s ease-in-out;
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+
+  &__copyright {
+    margin-top: 3.5rem;
+    font-family: $dona-bold;
+    color: #000;
+  }
+}

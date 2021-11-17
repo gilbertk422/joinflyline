@@ -1,0 +1,25 @@
+.trips {
+  margin-top: 2.2rem;
+  .tile {
+    box-shadow: unset;
+    border: none;
+    border-bottom: solid 1px #d9d9d9;
+  }
+  .trips-card__title {
+    font-family: dona-bold;
+    font-size: 1.4rem;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .trips-card__wrapper {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    background-size: 14% 30%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;
+  }
+  .trips-container {
+    width: 74%;
+    margin-left: calc(14% - 70px);
+  }
+}

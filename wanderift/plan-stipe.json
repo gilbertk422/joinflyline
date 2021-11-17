@@ -1,0 +1,8 @@
+{
+  "basic": {
+    "stripe_plan_id": "plan_GVoKhiGhoQonuM"
+  },
+  "premium": {
+    "stripe_plan_id": "plan_GVoKqUbnipDKWi"
+  }
+}

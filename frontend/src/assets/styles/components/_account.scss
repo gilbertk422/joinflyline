@@ -1,0 +1,126 @@
+.account {
+  &__form {
+    h3 {
+      font-family: $dona-black;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .label-information-saved {
+      font: $dona-black;
+      color: gray;
+      font-weight: 600;
+      margin-right: 1rem;
+    }
+
+    &-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      border: 2px solid $primary;
+      padding: 5px;
+    }
+
+    .invite-companion {
+      margin: 0 !important;
+    }
+
+    // table
+    table {
+      width: 100%;
+      th {
+        padding: 0.625rem;
+      }
+      tr {
+        &:nth-child(even) {
+          background-color: rgba(0, 174, 239, 0.18);
+        }
+      }
+      td {
+        padding: 0.625rem;
+        &:last-child {
+          text-align: right;
+        }
+      }
+      thead {
+        background-color: $primary;
+        color: white;
+      }
+
+      + p {
+        padding: 0.625rem 0;
+      }
+    }
+
+    &--table {
+      input {
+        height: 40px;
+      }
+
+      .btn-primary {
+        margin: 1rem 0;
+      }
+    }
+  }
+
+  &__select {
+    position: relative;
+    &-input {
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+  }
+  &__arrow {
+    position: absolute;
+    right: 1rem;
+    z-index: 11;
+    top: calc(50% + 1px);
+    transform: translateY(-50%);
+  }
+}
+
+.account-information {
+  .modal-content {
+    .modal-title {
+      font-family: $dona-black;
+
+      .button {
+        .span {
+          font-family: $dona-black;
+        }
+      }
+    }
+
+    .modal-body {
+      h1 {
+        font-size: 1rem;
+        line-height: 1.8;
+        font-family: $dona-bold;
+      }
+    }
+
+    .modal-footer {
+      button.btn.btn-secondary {
+        font-family: $dona-bold;
+        background-color: #00aeef;
+        border-radius: 0;
+        border: none;
+      }
+    }
+  }
+}
+
+
+// Tabs
+.account-information {
+  .tabs__item {
+    border-width: 1px;
+  }
+
+  .tabs__item.is-active {
+    border-color: #D8D8D8;
+  }
+}

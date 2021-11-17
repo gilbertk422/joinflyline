@@ -1,0 +1,29 @@
+.h-dealform {
+  &__dates {
+    display: flex;
+  }
+
+  .dealform__filters {
+    width: 100%;
+  }
+
+  .filter-field {
+    padding: 6px 0;
+    display: flex;
+  }
+
+  .filter-devider {
+    background: #fff;
+    height: 3px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .filters__container {
+    flex-grow: 1;
+  }
+
+  .filters__container + .filters__container {
+    margin-left: 1em;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "basic": {
+    "name": "Basic",
+    "price": {
+      "period": "annual",
+      "value": 49.99
+    },
+    "limit": 6,
+    "deal_alerts": true,
+    "companion": 0,
+    "members": 1
+  },
+  "premium": {
+    "name": "Premium",
+    "price": {
+      "period": "annual",
+      "value": 79.99
+    },
+    "limit": null,
+    "deal_alerts": true,
+    "companion": 3,
+    "members": 2
+  }
+}

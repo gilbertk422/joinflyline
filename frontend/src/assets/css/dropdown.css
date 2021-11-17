@@ -1,0 +1,101 @@
+@font-face {
+  font-family:Dona-Black;
+  src: url(fonts/Dona/DonaAlt-Black.ttf);
+}
+@font-face {
+  font-family:Dona-Regular;
+  src: url(fonts/Dona/Dona-Regular.ttf);
+}
+@font-face {
+    font-family: Dona-Bold;
+    src: url(fonts/Dona/Dona-Bold.ttf);
+}
+
+@media (max-width: 768px) {
+    .search-item.shadowsrch .search-input{
+        border-color: grey;
+    }
+    .search-item.shadowsrch span{
+        border-color: grey;
+    }
+}
+
+.flight_name{
+	font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+.flight-clock{
+    font-size: 10px;
+    font-weight: 400;
+    color: #5F738C;
+    line-height: 16px;
+    text-align: left;
+    margin: 4px 0;
+}
+.child-li{
+	padding: 0px 30px;
+}
+.search-row .col-md-3 {
+    padding: 0 5px;
+}
+.search-row .col-md-2 {
+    padding: 0 5px;
+}
+.lightpick {
+    margin-left:-48px;
+    margin-top: 3px;
+}
+button.search_btn{
+    padding: 11.6px 40px !important;
+    width: 100% !important;
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-family: Dona-Black;
+    color: #06AEEF;
+}
+.search-results .btn{
+    font-size: 18px;
+    font-family: Dona-Black !important;
+    color: #06AEEF;   
+}
+.dropdown-list p{
+    padding: 0px 16px;
+    padding-bottom: 30px;
+}
+
+.dropdown-list .airport {
+    padding-left: 32px;
+}
+
+.dropdown-list {
+    color: black;
+}
+
+.close-popup {
+    display: none;
+}
+
+@media(min-width: 320px) and (max-width: 480px){
+.search-dropdown-outer{
+    margin-bottom: 10px;
+}   
+.asset_box{
+    margin-top: 68px;   
+}
+.search-row .col-md-2 {
+    padding: 0px 15px;
+}
+.search-row .col-md-3 {
+    padding: 0px 15px;
+}
+.search-item.shadowsrch{
+    padding-right: 30px;
+}
+
+}
+

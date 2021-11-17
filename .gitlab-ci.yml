@@ -1,0 +1,91 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build
+  - package
+  - deploy
+
+cache:
+  paths:
+    - .python/
+
+docker-build-staging:
+  stage: package
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+      when: always
+  script:
+    - docker build --build-arg VUE_PUBLIC_PATH=${VUE_PUBLIC_PATH} --build-arg VUE_APP_API_ENDPOINT=${VUE_APP_API_ENDPOINT} -t registry.gitlab.com/zburau/joinflyline:${CI_COMMIT_REF_NAME} -f devops/docker/django/Dockerfile .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker push registry.gitlab.com/zburau/joinflyline:${CI_COMMIT_REF_NAME}
+  environment:
+    name: test
+    url: https://staging.joinflyline.com
+
+
+docker-build-production:
+  stage: package
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      when: always
+  script:
+    - docker build --build-arg VUE_PUBLIC_PATH=${VUE_PUBLIC_PATH} --build-arg VUE_APP_API_ENDPOINT=${VUE_APP_API_ENDPOINT} -t registry.gitlab.com/zburau/joinflyline:${CI_COMMIT_REF_NAME} -f devops/docker/django/Dockerfile .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker push registry.gitlab.com/zburau/joinflyline:${CI_COMMIT_REF_NAME}
+  environment:
+    name: production
+    url: https://joinflyline.com
+
+
+k8s-deploy-staging:
+  image: google/cloud-sdk
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "develop"'
+      when: always
+  script:
+  - kubectl config set-cluster ${KUBE_CLUSTER} --server=$KUBE_URL --insecure-skip-tls-verify=true
+  - kubectl config set-credentials admin --token=$KUBE_TOKEN
+  - kubectl config set-context ${KUBE_CONTEXT} --cluster=${KUBE_CLUSTER} --user=admin
+  - kubectl config use-context ${KUBE_CONTEXT}
+  - kubectl delete secret gitlab-registry --ignore-not-found -n ${KUBE_NAMESPACE} ${KUBE_NAMESPACE}
+  - kubectl delete secret gce-service-account-key --ignore-not-found -n ${KUBE_NAMESPACE}
+  - kubectl delete secret api-keys --ignore-not-found -n ${KUBE_NAMESPACE}
+  - kubectl create secret docker-registry gitlab-registry --docker-server=${CI_REGISTRY} --docker-username=${CI_REGISTRY_USER} --docker-password=${CI_REGISTRY_PASSWORD} --docker-email=${CI_REGISTRY_EMAIL} -n ${KUBE_NAMESPACE}
+  - kubectl create secret generic gce-service-account-key --from-file=${GCE_SERVICE_ACCOUNT_KEY} --from-file=${STRIPE_PLANS} -n ${KUBE_NAMESPACE}
+  - kubectl create secret generic api-keys --from-literal=STRIPE_API_KEY=${STRIPE_API_KEY} --from-literal=POSTGRES_PASSWORD=${POSTGRES_PASSWORD} --from-literal=SENDINBLUE_API_KEY=${SENDINBLUE_API_KEY} -n ${KUBE_NAMESPACE}
+  - kubectl apply -f devops/k8s/configmaps/env-staging.yml -n ${KUBE_NAMESPACE}
+  - sed -ie "s/THIS_STRING_IS_REPLACED_DURING_BUILD/$(date)/g" devops/k8s/deployments/deployment-staging.yml
+  - kubectl apply -f devops/k8s/deployments/deployment-staging.yml -n ${KUBE_NAMESPACE}
+  - kubectl apply -f devops/k8s/services/service-staging.yml -n ${KUBE_NAMESPACE}
+  environment:
+    name: test
+    url: https://staging.joinflyline.com
+
+k8s-deploy-production:
+  image: google/cloud-sdk
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      when: manual
+  script:
+  - kubectl config set-cluster ${KUBE_CLUSTER} --server=$KUBE_URL --insecure-skip-tls-verify=true
+  - kubectl config set-credentials admin --token=$KUBE_TOKEN
+  - kubectl config set-context ${KUBE_CONTEXT} --cluster=${KUBE_CLUSTER} --user=admin
+  - kubectl config use-context ${KUBE_CONTEXT}
+  - kubectl delete secret gitlab-registry --ignore-not-found -n ${KUBE_NAMESPACE} ${KUBE_NAMESPACE}
+  - kubectl delete secret gce-service-account-key --ignore-not-found -n ${KUBE_NAMESPACE}
+  - kubectl delete secret api-keys --ignore-not-found -n ${KUBE_NAMESPACE}
+  - kubectl create secret docker-registry gitlab-registry --docker-server=${CI_REGISTRY} --docker-username=${CI_REGISTRY_USER} --docker-password=${CI_REGISTRY_PASSWORD} --docker-email=${CI_REGISTRY_EMAIL} -n ${KUBE_NAMESPACE}
+  - kubectl create secret generic gce-service-account-key --from-file=${GCE_SERVICE_ACCOUNT_KEY} --from-file=${STRIPE_PLANS} -n ${KUBE_NAMESPACE}
+  - kubectl create secret generic api-keys --from-literal=STRIPE_API_KEY=${STRIPE_API_KEY} --from-literal=POSTGRES_PASSWORD=${POSTGRES_PASSWORD} --from-literal=SENDINBLUE_API_KEY=${SENDINBLUE_API_KEY} --from-literal=TWITTER_CONSUMER_API_KEY=${TWITTER_CONSUMER_API_KEY} --from-literal=TWITTER_CONSUMER_API_SECRET_KEY=${TWITTER_CONSUMER_API_SECRET_KEY} --from-literal=TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN} --from-literal=TWITTER_ACCESS_TOKEN_SECRET=${TWITTER_ACCESS_TOKEN_SECRET} -n ${KUBE_NAMESPACE}
+  - kubectl apply -f devops/k8s/configmaps/env-production.yml -n ${KUBE_NAMESPACE}
+  - sed -ie "s/THIS_STRING_IS_REPLACED_DURING_BUILD/$(date)/g" devops/k8s/deployments/deployment-production.yml
+  - kubectl apply -f devops/k8s/deployments/deployment-production.yml -n ${KUBE_NAMESPACE}
+  - kubectl apply -f devops/k8s/services/service-production.yml -n ${KUBE_NAMESPACE}
+  environment:
+    name: production
+    url: https://joinflyline.com
+

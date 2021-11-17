@@ -1,0 +1,137 @@
+.wizard {
+  font-family: Dona-Bold;
+  background-color: #F8FAFD;
+  min-height: 100vh;
+  .wizard__logo {
+    position: absolute;
+    top: 0;
+    z-index: 22;
+    padding: 1rem 0;
+    left: 2rem;
+  }
+  .wizard__sidebar {
+    width: 36rem;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    @include mq(xl) {
+      display: block;
+    }
+  }
+  .wizard__content {
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0 7em 0 4.375rem;
+    @include mq(xl) {
+      margin-left: 36rem;
+      max-width: 54%;
+    }
+  }
+  .wizard__top {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+
+    span {
+      font-family: dona-regular;
+      font-size: 14px;
+      color: #929292;
+    }
+  }
+  .wizard__goback {
+    font-family: dona-regular;
+    font-size: 14px;
+    color: #929292;
+  }
+  .wizard__bottom {
+    padding-top: 2.4rem;
+  }
+  .wizard__title {
+    font-family: Dona-Black;
+    font-size: 34px;
+  }
+  .wizard__info {
+    color: #9D9D9D;
+    font-family: Dona-regular;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 33px;
+    border-bottom: 1px solid #D8D8D8;
+    margin-bottom: 33px;
+  }
+  .wizard__input {
+    -webkit-appearance: none;
+    width: 100%;
+    font-family: dona-regular;
+    font-size: 13.2px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
+    color: #929292;
+    border: 1px solid transparent;
+    border-radius: 0;
+    transition: all .2s ease-in-out;
+    padding: 1rem 0.8rem;
+    margin-bottom: 20px;
+    &:focus {
+      border-color: #0aaeff;
+      outline: none;
+      box-shadow: 0 2px 4px 0 rgba(0, 176, 245, 0.4);
+    }
+  }
+  .wizard-payment {
+    color: #929292;
+    text-align: center;
+    margin-bottom: 2rem;
+
+    .control--checkbox {
+      margin: 0.5rem 0 1.5rem;
+    }
+  }
+  .wizard-payment__heading {
+    padding: 20px 0 10px;
+    position: relative;
+    font-family: Dona-regular;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 20%;
+      height: 2px ;
+      background-color: #D8D8D8;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+    .wizard-payment__title {
+      font-size: 14px;
+    }
+    .wizard-payment__text {
+      font-size: 12px;
+    }
+  }
+  .wizard__submit {
+    -webkit-appearance: none;
+    border: 0;
+    background-color: #00AEEF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    color: white;
+    width: 100%;
+    padding: 1.4rem 1rem 1rem;
+    font-size: 18px;
+    font-family: Dona-Black;
+    transition: background .2s ease-in-out;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background-color: darken(#00AEEF, 3%);
+    }
+  }
+}

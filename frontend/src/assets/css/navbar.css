@@ -1,0 +1,135 @@
+a.custom_nav_link:hover {
+    color: #00B7FF;
+}
+
+.navbar-section {
+    border-bottom: 1px solid silver;
+}
+
+.navbar-section nav {
+    padding:0px 15px;
+    background-color: white;
+    box-shadow: none;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.navbar-section.pre-dark nav {
+    padding-top: 15px;
+    background-color: white;
+    box-shadow: none;
+    border-bottom: none;
+}
+
+.navbar-section nav .nav_btn_link {
+    padding-top: 10px;
+}
+
+/****************** Navigation ***********/
+nav {
+    position: relative;
+}
+
+.navbar-brand {
+    display: block;
+    position: absolute;
+    padding-top:0px;
+}
+
+.nav_btn_link {
+    position: absolute;
+    left: 30px;
+    top: 5px;
+    padding: 0;
+    display: none;
+    box-shadow: 0 2px 4px whitesmoke;
+}
+
+.nav_btn_link .nav-button-logout {
+    background-color: white;
+    border: 1px solid #2e6da4;
+    padding: 4px 30px;
+    border-radius: 3px;
+
+}
+
+.nav_btn_link.get_started_btn {
+    top: 0;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+    color: #1d222e;
+}
+
+
+
+@media screen and (min-width: 992px) {
+    .nav_btn_link {
+        display: block;
+    }
+
+    .slider-holder {
+        display: inline-block;
+    }
+}
+
+@media(min-width: 320px) and (max-width: 480px){
+.navbar-toggler{
+    float: right;
+}
+.navbar-nav {
+    text-align: left;
+    align-items: end;
+    margin-top: 10px;
+}
+.navbar-nav .nav-item {
+    margin-bottom: 13px;
+    margin-left: 0px !important;
+}
+.loadingLine{
+    display: none;
+}
+.navbar-nav {
+    text-align: left;
+    align-items: end;
+    margin-top: 10px;
+}
+.navbar-nav .nav-item {
+    margin-bottom: 13px;
+    margin-left: 0px !important;
+}
+
+.loadingLine{
+    display: none;
+}
+
+}
+
+@media (max-width: 768px) {
+
+    .navbar-nav .nav-item {
+        margin-bottom: 13px;
+        margin-left: 0px !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .navbar-toggler {
+        float: right;
+    }
+
+    .navbar-nav {
+        text-align: left;
+        align-items: end;
+    }
+
+    .navbar-nav .nav-item {
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-item a button {
+        margin-top: -6px;
+    }
+
+
+}

@@ -1,0 +1,79 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wanderift-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/cluster-issuer: 'letsencrypt-prod'
+    certmanager.k8s.io/acme-challenge-type: http01
+    ingress.kubernetes.io/configuration-snippet: | 
+        rewrite ^/(.*)$ https://joinflyline.com$1 permanent;
+spec:
+  tls:
+    - hosts:
+        - joinflyline.com
+        - wanderift.com
+        - www.wanderift.com
+        - www.joinflyline.com
+        - flylineapp.com
+        - www.flylineapp.com
+        - flyline.io
+        - www.flyline.io
+      secretName: wanderift-secret
+  rules:
+    - host: joinflyline.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: wanderift.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: www.joinflyline.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: www.wanderift.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: flylineapp.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: www.flylineapp.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: flyline.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
+    - host: www.flyline.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wanderift-service-production
+              servicePort: 80
